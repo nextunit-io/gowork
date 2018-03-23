@@ -6,6 +6,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
+	// TODO: Remove relative path
 	pkg "./pkg"
 )
 
