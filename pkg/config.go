@@ -19,11 +19,11 @@ var (
 )
 
 type Configuration struct {
-	Repository     string
-	CurrentDir     string
-	CurrentDirHash string
-	GoPath         string
-	GoExportPath   string
+	Repository    string
+	CurrentDir    string
+	WorkspaceName string
+	GoPath        string
+	GoExportPath  string
 }
 
 func GetHomePath() string {

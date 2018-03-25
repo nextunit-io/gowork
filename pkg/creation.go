@@ -13,10 +13,10 @@ type Creation interface {
 }
 
 type creation struct {
-	homeDir        string
-	repository     string
-	currentDir     string
-	currentDirHash string
+	homeDir       string
+	repository    string
+	currentDir    string
+	workspaceName string
 }
 
 // NewCreation is a function, that returns a Creation interface object.
@@ -33,16 +33,17 @@ func NewCreation() Creation {
 		os.Exit(1)
 	}
 
-	createFlag := flag.NewFlagSet("create", flag.ExitOnError)
-	repositoryName := createFlag.String("repo", "", "Imports within this folder will be symlinked into your environment.")
-	createFlag.Parse(os.Args[2:])
-
 	currentDirHash := GetHashForDirectory(currentDir)
 
+	createFlag := flag.NewFlagSet("create", flag.ExitOnError)
+	repositoryName := createFlag.String("repo", "", "Imports within this folder will be symlinked into your environment.")
+	workspaceName := createFlag.String("name", currentDirHash, "Name of the workspace - if not used the hash of the current directory will be used.")
+	createFlag.Parse(os.Args[2:])
+
 	return &creation{
-		homeDir:        homeDir,
-		repository:     *repositoryName,
-		currentDir:     currentDir,
-		currentDirHash: currentDirHash,
+		homeDir:       homeDir,
+		repository:    *repositoryName,
+		currentDir:    currentDir,
+		workspaceName: *workspaceName,
 	}
 }

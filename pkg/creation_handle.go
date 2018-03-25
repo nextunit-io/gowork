@@ -11,7 +11,7 @@ import (
 
 // Handle is a function to create the workspace for the current environment.
 func (c *creation) Handle() {
-	configFilePath := filepath.Join(c.homeDir, c.currentDirHash)
+	configFilePath := filepath.Join(c.homeDir, c.workspaceName)
 	goPath := filepath.Join(configFilePath, GoPathDir)
 
 	_, err := os.Stat(configFilePath)
@@ -39,16 +39,16 @@ func (c *creation) Handle() {
 		c.createRepositorySymlink(goPath)
 	}
 
-	fmt.Printf("Created a workspace here. (%s)", c.currentDirHash)
+	fmt.Printf("Created a workspace. (%s)", c.workspaceName)
 }
 
 func (c *creation) createConfiguration(goPath, goExportPath string) *Configuration {
 	return &Configuration{
-		CurrentDir:     c.currentDir,
-		CurrentDirHash: c.currentDirHash,
-		Repository:     c.repository,
-		GoPath:         goPath,
-		GoExportPath:   goExportPath,
+		CurrentDir:    c.currentDir,
+		WorkspaceName: c.workspaceName,
+		Repository:    c.repository,
+		GoPath:        goPath,
+		GoExportPath:  goExportPath,
 	}
 }
 

@@ -11,8 +11,9 @@ func (c *usage) Handle() {
 		os.Exit(1)
 	}
 
+	outputShell("Gowork activated.")
+	fmt.Print(" && ")
 	fmt.Printf("export %s=%q\n", envVarGoworkOldPath, c.goworkOldPath)
 	fmt.Printf("export GOPATH=%q\n", c.config.GoExportPath)
 	// fmt.Printf("alias deactivate=\"eval `./gowork deactivate`\"\n")
-	outputShell("Gowork activated.")
 }

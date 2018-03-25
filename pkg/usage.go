@@ -2,11 +2,11 @@ package pkg
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 var (
@@ -20,7 +20,6 @@ type Usage interface {
 type usage struct {
 	homeDir           string
 	currentDir        string
-	currentDirHash    string
 	goworkUsageActive bool
 	goworkOldPath     string
 	config            *Configuration
@@ -47,13 +46,13 @@ func NewUsage() Usage {
 	if oldPath == "" {
 		usageActive = false
 		oldPath = os.Getenv("GOPATH")
-
-		if os.PathSeparator == '\\' {
-			oldPath = strings.Replace(oldPath, "\\", "/", -1)
-		}
 	}
 
-	configFilePath := filepath.Join(homeDir, currentDirHash)
+	usageFlag := flag.NewFlagSet("use", flag.ExitOnError)
+	workspaceName := usageFlag.String("name", currentDirHash, "Name of the workspace - if not used the hash of the current directory will be used.")
+	usageFlag.Parse(os.Args[2:])
+
+	configFilePath := filepath.Join(homeDir, *workspaceName)
 	data, err := ioutil.ReadFile(filepath.Join(configFilePath, ConfigFileName))
 
 	if err != nil {
@@ -72,7 +71,6 @@ func NewUsage() Usage {
 	return &usage{
 		homeDir:           homeDir,
 		currentDir:        currentDir,
-		currentDirHash:    currentDirHash,
 		goworkUsageActive: usageActive,
 		goworkOldPath:     oldPath,
 		config:            config,
@@ -80,5 +78,5 @@ func NewUsage() Usage {
 }
 
 func outputShell(output string) {
-	fmt.Printf("echo %q", output)
+	fmt.Printf("echo %q\n", output)
 }
