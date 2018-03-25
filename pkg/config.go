@@ -11,8 +11,11 @@ var (
 	homeDirEnvironmentKey = "GOWORK_HOME"
 	homeDirDefault        = ".gowork"
 
+	// ConfigFileName is a vaiarble to configure the filename of othe workon config file.
 	ConfigFileName = "gowork.json"
-	GoPathDir      = "go-source"
+
+	// GoPathDir is a variable where the source is stored.
+	GoPathDir = "src"
 )
 
 type Configuration struct {
@@ -20,6 +23,7 @@ type Configuration struct {
 	CurrentDir     string
 	CurrentDirHash string
 	GoPath         string
+	GoExportPath   string
 }
 
 func GetHomePath() string {

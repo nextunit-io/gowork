@@ -26,7 +26,7 @@ func (c *creation) Handle() {
 		os.Exit(1)
 	}
 
-	jsonBody, err := json.Marshal(c.createConfiguration(goPath))
+	jsonBody, err := json.Marshal(c.createConfiguration(goPath, configFilePath))
 	if err != nil {
 		fmt.Printf("Cannot create json body: %s", err.Error())
 		os.Exit(1)
@@ -42,12 +42,13 @@ func (c *creation) Handle() {
 	fmt.Printf("Created a workspace here. (%s)", c.currentDirHash)
 }
 
-func (c *creation) createConfiguration(goPath string) *Configuration {
+func (c *creation) createConfiguration(goPath, goExportPath string) *Configuration {
 	return &Configuration{
 		CurrentDir:     c.currentDir,
 		CurrentDirHash: c.currentDirHash,
 		Repository:     c.repository,
 		GoPath:         goPath,
+		GoExportPath:   goExportPath,
 	}
 }
 

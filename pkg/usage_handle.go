@@ -3,21 +3,16 @@ package pkg
 import (
 	"fmt"
 	"os"
-	"strings"
 )
 
-func (c *usage) Handle() error {
-	fmt.Print(getPathEntry())
-	return nil
-}
-
-func getPathEntry() string {
-	env := os.Environ()
-	for i := range env {
-		if strings.HasPrefix(env[i], "PATH=") {
-			return env[i][5:]
-		}
+func (c *usage) Handle() {
+	if c.goworkUsageActive {
+		outputShell(fmt.Sprintf("GOWork already activated."))
+		os.Exit(1)
 	}
 
-	return ""
+	fmt.Printf("export %s=%q\n", envVarGoworkOldPath, c.goworkOldPath)
+	fmt.Printf("export GOPATH=%q\n", c.config.GoExportPath)
+	// fmt.Printf("alias deactivate=\"eval `./gowork deactivate`\"\n")
+	outputShell("Gowork activated.")
 }
