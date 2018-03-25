@@ -3,6 +3,7 @@ package pkg
 import (
 	"crypto/sha256"
 	"encoding/base64"
+	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -10,6 +11,7 @@ import (
 var (
 	homeDirEnvironmentKey = "GOWORK_HOME"
 	homeDirDefault        = ".gowork"
+	envVarGoworkOldPath   = "GOWORK_GOPATH"
 
 	// ConfigFileName is a vaiarble to configure the filename of othe workon config file.
 	ConfigFileName = "gowork.json"
@@ -48,4 +50,8 @@ func GetHashForDirectory(dir string) string {
 	h := sha256.New()
 	h.Write([]byte(dir))
 	return base64.URLEncoding.EncodeToString(h.Sum(nil))
+}
+
+func OutputShell(output string) {
+	fmt.Printf("echo %q\n", output)
 }

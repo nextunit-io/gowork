@@ -21,6 +21,9 @@ func main() {
 	case "use":
 		pkg.NewUsage().Handle()
 		break
+	case "deactivate":
+		pkg.NewDeactivate().Handle()
+		break
 	default:
 		fmt.Printf("Please use not %s", os.Args[1])
 		os.Exit(1)

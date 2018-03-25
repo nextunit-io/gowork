@@ -9,10 +9,6 @@ import (
 	"path/filepath"
 )
 
-var (
-	envVarGoworkOldPath = "GOWORK_GOPATH"
-)
-
 type Usage interface {
 	Handle()
 }
@@ -29,13 +25,13 @@ func NewUsage() Usage {
 	homeDir, err := GetAndCreateHomePath()
 
 	if err != nil {
-		outputShell(fmt.Sprintf("Cannot create homedir '%s': %s", homeDir, err.Error()))
+		OutputShell(fmt.Sprintf("Cannot create homedir '%s': %s", homeDir, err.Error()))
 		os.Exit(1)
 	}
 
 	currentDir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
-		outputShell(fmt.Sprintf("Error while getting the current path: %s", err.Error()))
+		OutputShell(fmt.Sprintf("Error while getting the current path: %s", err.Error()))
 		os.Exit(1)
 	}
 
@@ -56,15 +52,15 @@ func NewUsage() Usage {
 	data, err := ioutil.ReadFile(filepath.Join(configFilePath, ConfigFileName))
 
 	if err != nil {
-		outputShell("Config file not found. Please use gowork create.")
-		outputShell(err.Error())
+		OutputShell("Config file not found. Please use gowork create.")
+		OutputShell(err.Error())
 		os.Exit(1)
 	}
 
 	config := &Configuration{}
 	err = json.Unmarshal(data, config)
 	if err != nil {
-		outputShell(fmt.Sprintf("Error while reading config file: %s", err.Error()))
+		OutputShell(fmt.Sprintf("Error while reading config file: %s", err.Error()))
 		os.Exit(1)
 	}
 
@@ -75,8 +71,4 @@ func NewUsage() Usage {
 		goworkOldPath:     oldPath,
 		config:            config,
 	}
-}
-
-func outputShell(output string) {
-	fmt.Printf("echo %q\n", output)
 }
