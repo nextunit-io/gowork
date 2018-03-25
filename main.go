@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/nextunit-io/gowork/pkg"
+
 	log "github.com/sirupsen/logrus"
-	// TODO: Remove relative path
-	pkg "./pkg"
 )
 
 func init() {
