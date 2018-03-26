@@ -15,5 +15,5 @@ func (u *usage) Handle() {
 	fmt.Print(" && ")
 	fmt.Printf("export %s=%q\n", envVarGoworkOldPath, u.goworkOldPath)
 	fmt.Printf("export GOPATH=%q\n", u.config.GoExportPath)
-	fmt.Printf("&& shopt -s expand_aliases && alias deactivate=%q\n", "eval `./gowork deactivate`")
+	fmt.Printf("&& shopt -s expand_aliases && alias deactivate=%q\n", "eval `${GOWORK_ROOT_PATH}/gowork deactivate`")
 }
