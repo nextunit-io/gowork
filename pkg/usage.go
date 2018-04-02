@@ -18,6 +18,7 @@ type usage struct {
 	currentDir        string
 	goworkUsageActive bool
 	goworkOldPath     string
+	configPath        string
 	config            *Configuration
 }
 
@@ -49,7 +50,8 @@ func NewUsage() Usage {
 	usageFlag.Parse(os.Args[2:])
 
 	configFilePath := filepath.Join(homeDir, *workspaceName)
-	data, err := ioutil.ReadFile(filepath.Join(configFilePath, ConfigFileName))
+	configPath := filepath.Join(configFilePath, ConfigFileName)
+	data, err := ioutil.ReadFile(configPath)
 
 	if err != nil {
 		OutputShell("Config file not found. Please use gowork create.")
@@ -69,6 +71,7 @@ func NewUsage() Usage {
 		currentDir:        currentDir,
 		goworkUsageActive: usageActive,
 		goworkOldPath:     oldPath,
+		configPath:        configPath,
 		config:            config,
 	}
 }

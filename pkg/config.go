@@ -9,9 +9,10 @@ import (
 )
 
 var (
-	homeDirEnvironmentKey = "GOWORK_HOME"
-	homeDirDefault        = ".gowork"
-	envVarGoworkOldPath   = "GOWORK_GOPATH"
+	homeDirEnvironmentKey  = "GOWORK_HOME"
+	homeDirDefault         = ".gowork"
+	envVarGoworkOldPath    = "GOWORK_GOPATH"
+	envVarGoworkConfigPath = "GOWORK_CONFIG_PATH"
 
 	// ConfigFileName is a vaiarble to configure the filename of othe workon config file.
 	ConfigFileName = "gowork.json"

@@ -13,6 +13,7 @@ func (d *deactivate) Handle() {
 
 	OutputShell("Gowork deactivated.")
 	fmt.Print("shopt -s expand_aliases && unalias deactivate\n")
+	fmt.Print("shopt -s expand_aliases && unalias go\n")
 	fmt.Printf("export %s=\"\"\n", envVarGoworkOldPath)
 	fmt.Printf("export GOPATH=%q\n", d.goworkOldPath)
 }

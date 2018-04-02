@@ -9,3 +9,7 @@ alias mkgowork="${GOWORK_ROOT_PATH}/gowork create"
 goworkuse() {
     eval `${GOWORK_ROOT_PATH}/gowork use $@`
 }
+
+_gowork_go() {
+    eval `${GOWORK_ROOT_PATH}/gowork go $@`
+}

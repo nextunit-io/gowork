@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/nextunit-io/gowork/pkg"
+	// "github.com/nextunit-io/gowork/pkg"
+	pkg "./pkg"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -23,6 +24,9 @@ func main() {
 		break
 	case "deactivate":
 		pkg.NewDeactivate().Handle()
+		break
+	case "go":
+		pkg.NewGocmd().Handle()
 		break
 	default:
 		fmt.Printf("Please use not %s", os.Args[1])
