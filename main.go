@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	// "github.com/nextunit-io/gowork/pkg"
-	pkg "./pkg"
+	"github.com/nextunit-io/gowork/pkg"
 
 	log "github.com/sirupsen/logrus"
 )
